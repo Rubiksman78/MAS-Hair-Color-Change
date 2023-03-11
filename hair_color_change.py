@@ -37,15 +37,10 @@ im_backup_back = im_back.copy()
 
 mask_front = im_front[:,:,3] > 0
 inverse_mask_front = im_front[:,:,3] == 0
-color_mask_front = np.ones_like(im_front, dtype=np.float32)
 
 mask_back = im_back[:,:,3] > 0
 inverse_mask_back = im_back[:,:,3] == 0
-color_mask_back = np.ones_like(im_back, dtype=np.float32)
 
-#put all the rest to black
-color_mask_front[~mask_front] = [0, 0, 0, 0]
-color_mask_back[~mask_back] = [0, 0, 0, 0]
 def nothing(x):
     pass
 
@@ -111,7 +106,6 @@ bit_mask_back = np.stack((mask_back,)*3, axis=-1)
 
 bit_inverse_mask_front = np.stack((inverse_mask_front,)*3, axis=-1)
 bit_inverse_mask_back = np.stack((inverse_mask_back,)*3, axis=-1)
-print(np.sum(bit_mask_front==True),np.sum(bit_mask_front==False))
 
 h_front, s_front, v_front = cv2.split(hsv_front)
 h_back, s_back, v_back = cv2.split(hsv_back)
@@ -164,14 +158,15 @@ root.withdraw()
 answer = messagebox.askyesno("Save changes", "Do you want to save the changes?")
 root.destroy()
 
-print(answer)
 if answer == False:
-    im_front = im_backup_front/255
-    im_back = im_backup_back/255
+    im_front = im_backup_front
+    im_back = im_backup_back
 
 #save image and backup
-cv2.imwrite(file_back, im_back*255)
-cv2.imwrite(file_front, im_front*255)
+
+print(im_back.shape)
+cv2.imwrite(file_back, im_back)
+cv2.imwrite(file_front, im_front)
 if not os.path.isfile(file + '-back-backup.png') and not os.path.isfile(file + '-front-backup.png') and answer == True:
     cv2.imwrite(file + '-back-backup.png', im_backup_back)
     cv2.imwrite(file + '-front-backup.png', im_backup_front)
