@@ -1,2 +1,2 @@
 @echo off
-"haircolorchangelib/python.exe" test_change_hair_color.py
+"haircolorchangelib/python.exe" hair_color_change.py 
