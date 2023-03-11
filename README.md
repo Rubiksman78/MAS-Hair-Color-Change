@@ -2,11 +2,15 @@
 
 Simple Python script with OpenCV to change spritepacks hair color in Monika After Story.
 
+## Disclaimer
+
+It's not really a submod and more like an utilitary script to modify some game assets. It changes the whole sprite color so it can have weird results with the skin junction on the forehead.
+
 ## Installation
 
 ### Windows simple version
 
-Download haircolorchanger.zip in Releases and unzip it in your MAS folder at the location `game/`.
+Download `haircolorchanger.zip` in Releases and unzip it in your MAS folder at the location `game/`.
 
 Launch `haircolorchange.bat` to execute the script.
 
